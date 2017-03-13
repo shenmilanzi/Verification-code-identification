@@ -10,7 +10,9 @@ Verification code identification using Python  
 ##解决问题
 ###1）pytesser3
 稍微google了一下，发现有现成开源的工具pytesse(OCR in Python using the Tesseract engine from Google。是谷歌OCR开源项目的一个模块，可将图片中的文字转换成文本（主要是英文）)。捣鼓了半天，主要是安装tesseract-OCR引擎，费了番功夫安装好后，迫不及待满怀期待地试了下，结果几乎识别不出。考虑到我试验的图片并没有做处理，就是原始图片直接扔进去识别，所以怀疑是不是图片的问题。之前也没有接触过图像处理方面的东西，就简单照着网上的代码，调了图片的灰度、对比度增强，再拿去做识别发现还是不理想，所以最终放弃了这个工具。<br>
-###2）SVM
+###2）cookies
+看到一篇技术博客，说利用网站cookie可以绕开验证码直接登陆。怀着试一试的想法，我也试过这一方法，利用抓包工具查看cookies，在模拟登陆时加入相应的cookies，但是发现每次登陆cookies是不一样的。最后这一尝试也宣告失败。
+###3）SVM
 ####2.1 图片预处理
 原始验证码图片已经有了，于是首先需要对这些图片做预处理。先将彩色图片转为灰度图，再增加了图像的锐度，使图像更加清晰，最后再将图片二值化为黑白图。如图![](https://github.com/shenmilanzi/Verification-code-identification/blob/master/01.png)。此时的图片为黑白图，背景的雪花因为本身为浅色，初步处理后已经消除的比较干净了，只是还残留干扰线。干扰线的处理方法参考了这篇[博客](http://www.cnblogs.com/beer/p/5672678.html)。写好了del_noise(img)函数后，将初步处理的图片传入函数，发现效果“特别特别好”！（当晚非常激动！！）处理干扰线后的图片像这样![](https://github.com/shenmilanzi/Verification-code-identification/blob/master/8-3.png)。这两个图片都是经过图片切割之后的。因为我遇到的验证码里面的数字都分得很开，直接找到每个数字所在的区域做一下切割就好了。
 ####2.2 人工标记
