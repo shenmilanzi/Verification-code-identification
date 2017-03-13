@@ -23,3 +23,5 @@ Verification code identification using Python  
 用了一种方法解决了这个问题自然还不够，不是还没用“高大上”的机器学习吗。我准备再尝试下用SVM来解决这一问题。SVM的基本原理我大概知道一点，但是这里偏向于解决实际问题，也就不深究一些细节了，直接利用sklearn里的SVM类。选择好图像特征，和那博客中的类似，记录下每张图片每一行和每一列中“黑点”的个数，图片都是27 * 50像素，一共77维。这里也没有考虑维数对计算量的影响。获取训练样本和标签后就可以训练模型了。模型训练好，再把待识别图片的特征输入做预测。最终识别结果不如kNN那种方法。<br>
 ###思考
 见[备注.txt](https://github.com/shenmilanzi/Verification-code-identification/blob/master/%E5%A4%87%E6%B3%A8.txt)
+###鸣谢
+感谢一切开源的大牛和前辈，特别感谢那篇博客的作者哈莫！
